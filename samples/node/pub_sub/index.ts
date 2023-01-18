@@ -26,6 +26,7 @@ async function execute_session(connection: mqtt.MqttClientConnection, argv: Args
             let subscribed = false;
             const decoder = new TextDecoder('utf8');
             const on_publish = async (topic: string, payload: ArrayBuffer, dup: boolean, qos: mqtt.QoS, retain: boolean) => {
+                argv['message'] = get_randos();
                 const json = decoder.decode(payload);
                 console.log(`Publish received. topic:"${topic}" dup:${dup} qos:${qos} retain:${retain}`);
                 console.log(json);
@@ -82,4 +83,15 @@ async function main(argv: Args) {
 
     // Allow node to die if the promise above resolved
     clearTimeout(timer);
+}
+
+function get_randos() {
+        let heartrate = make_randos(0, 170);
+        let respirationrate = make_randos(0, 30);
+        return 'heartrate: ' + heartrate + '\nrespirationrate: ' + respirationrate + '\nchildID: child1';
+}
+
+
+function make_randos(min: number, max: number) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
 }
