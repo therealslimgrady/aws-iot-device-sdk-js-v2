@@ -170,7 +170,7 @@ function add_topic_message_arguments(yargs) {
             alias: 'M',
             description: 'Message to publish (optional).',
             type: 'string',
-            default: 'Hello world!'
+            default: 'heartrate: not received\nrespirationrate: not received\nchildID: child1'
         })
 }
 
